@@ -1,0 +1,5 @@
+require_relative 'note'
+require_relative 'interval'
+#require_relative 'scale_advance_factory'
+#require_relative 'mode'
+require_relative 'scale2'

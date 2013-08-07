@@ -1,5 +1,6 @@
 require_relative 'note'
 require_relative 'interval'
+require_relative 'mode'
 
 module Music
 
@@ -53,14 +54,33 @@ module Music
     end
 
 
+    module HasIntervals
+
+      def intervals
+        @intervals
+      end
+
+      def has?(symbol)
+        if INTERVAL_NAMES.has_key? symbol
+          intervals.include? INTERVAL_NAMES[symbol]
+        else
+          raise IntervalError, "Unknown interval: #{symbol}"
+        end
+      end
+
+      def each_interval
+        intervals.each { |i| yield i }
+      end
+
+    end
+
+
     class Scale
+      extend HasIntervals
+      include HasIntervals
 
       def self.mode_names=(mode_names)
         @mode_names = mode_names
-      end
-
-      def self.intervals
-        @intervals
       end
 
       def self.intervals=(intervals)
@@ -77,15 +97,12 @@ module Music
 
       def initialize(key)
         @key = key
-        @notes = self.class.intervals.map { |int| key + int }#.sort { |note| note.to_i }
+        @notes = self.class.intervals.map { |int| key + int }
       end
+      attr_reader :notes
 
-      def has?(symbol)
-        if INTERVAL_NAMES.has_key? symbol
-          self.class.intervals.include? INTERVAL_NAMES[symbol]
-        else
-          raise IntervalError, "Unknown interval: #{symbol}"
-        end
+      def intervals
+        self.class.intervals
       end
 
       def include?(note)
@@ -94,10 +111,6 @@ module Music
 
       def each
         @notes.each { |n| yield n }
-      end
-
-      def each_interval
-        self.class.intervals.each { |i| yield i }
       end
 
     end

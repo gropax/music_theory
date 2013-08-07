@@ -73,6 +73,11 @@ module Music
         Note.new(code)
       end
 
+      def -(interval)
+        code = (@code - interval.to_i) % 12
+        Note.new(code)
+      end
+
       def method_missing(m, *args, &block)
         if INTERVAL_NAMES.include? m
           get_relative(INTERVAL_NAMES[m])

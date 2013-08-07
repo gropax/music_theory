@@ -24,12 +24,12 @@ module Music
       end
 
       def ==(other)
-        @semitones == other.semitones
+        @semitones == other.to_i
       end
 
       def +(other)
         semitones = (@semitones + other.to_i) % 12
-        Intervar.new(semitones)
+        Interval.new(semitones)
       end
 
       def -(other)
