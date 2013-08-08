@@ -1,52 +1,62 @@
 
 module Music
-
   module Cyclic
 
     class Interval
+      attr_reader :value
 
-      attr_reader :semitones
-
-      IntervalError = Class.new(StandardError)
-
-      def initialize(param)
-        if param.is_a? Integer
-          @semitones = param
-        elsif param.is_a? Symbol
-          if INTERVAL_NAMES.include? param
-            @semitones = INTERVAL_NAMES[param]
-          else
-            raise IntervalError, "Invalid interval #{param}"
-          end
+      def initialize(param, interval_io = IntervalIO.new)
+        @interval_io = interval_io
+        if (param.is_a? String) || (param.is_a? Symbol)
+          @value = @note_io.interval_value(param.to_s)
+        elsif param.respond_to? :to_i
+          @value = param.to_i % 12
         else
-          raise TypeError, "Take Integer or Symbol but found: #{param.class}"
+          raise TypeError, "Wrong type: #{param.class}"
         end
       end
 
       def ==(other)
-        @semitones == other.to_i
+        @value == other.to_i
       end
 
       def +(other)
-        semitones = (@semitones + other.to_i) % 12
-        Interval.new(semitones)
+        value = (@value + other.to_i) % 12
+        Interval.new(value)
       end
 
       def -(other)
-        semitones = (@semitones - other.to_i) % 12
-        Interval.new(semitones)
+        value = (@value - other.to_i) % 12
+        Interval.new(value)
       end
 
       def to_s
-        "The #{INTERVAL_NAMES.key(@semitones).to_s.sub(/_/, ' ').capitalize}'s Interval"
+        @interval_io.print @value
       end
 
       def to_i
-        @semitones
+        @value
+      end
+
+    end
+
+
+    class IntervalIO
+      IntervalStringError = Class.new(StandardError)
+
+      def interval_value(string)
+        if INTERVAL_NAMES.include? string
+          INTERVAL_NAMES[string]
+        else
+          raise IntervalError, "Invalid interval #{string}"
+        end
+      end
+
+      def print(interval_value)
+        "The #{INTERVAL_NAMES.key(interval_value).to_s.sub(/_/, ' ').capitalize}'s Interval"
       end
 
     end
 
   end
-
 end
