@@ -3,7 +3,6 @@ module Music
   module Cyclic
 
     class Interval
-      attr_reader :value
 
       def initialize(param, interval_io = IntervalIO.new)
         @interval_io = interval_io

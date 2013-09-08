@@ -1,9 +1,9 @@
 
 module Music
+
   module Cyclic
 
     class Note
-      attr_reader :value
 
       def initialize(param, note_io = NoteIO.new)
         @note_io = note_io
@@ -47,7 +47,6 @@ module Music
       NOTES = { 'C' => 0, 'D' => 2, 'E' => 4, 'F' => 5, 'G' => 7, 'A' => 9, 'B' => 11 }
       SYMBOLS = {'#' => 1, 'b' => -1, nil => 0}
 
-      OutputModeError = Class.new(StandardError)
       NoteStringError = Class.new(StandardError)
 
       def initialize
@@ -88,4 +87,5 @@ module Music
     end
 
   end
+
 end
