@@ -1,12 +1,10 @@
-require_relative 'note'
 
-require_relative 'interval'
-require_relative 'scale'
-
-require_relative 'constants'
+require_relative 'cyclic'
 
 module Music
 
   LIBPATH = File.absolute_path(__FILE__)
 
 end
+
+include Music::Cyclic

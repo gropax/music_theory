@@ -6,7 +6,7 @@ class CyclicScaleTest < Test::Unit::TestCase
   include Music::Cyclic
 
   def setup
-    @major_scale = ScaleFactory.new('major scale', [0, 2, 4, 5, 7, 9, 11], %w(ionian dorian phrygian lydian mixolydian eolian locrian))
+    @major_scale = ScaleFactory.new('major scales', [0, 2, 4, 5, 7, 9, 11], %w(ionian dorian phrygian lydian mixolydian eolian locrian))
     @c_major_scale = @major_scale.new(C)
   end
 

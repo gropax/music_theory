@@ -53,7 +53,7 @@ module Music
     end
 
 
-    #ScaleFactory.new('major scale', [0, 2, 4, 5, 7, 9, 11], %w(ionian dorian phrygian lydian mixolydian eolian locrian))
+    #ScaleFactory.new('major scales', [0, 2, 4, 5, 7, 9, 11], %w(ionian dorian phrygian lydian mixolydian eolian locrian))
     #p 'intervals'
     #MajorScale.new(A).each_interval { |i| p i }
     #p ''

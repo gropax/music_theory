@@ -8,7 +8,7 @@ module Music
 
     # Some ideas:
     #   - Use modules inclusion/extensions instead of inheritance
-    #   - Use self-extend modules for some scale and mode (intervals)
+    #   - Use self-extend modules for some scales and mode (intervals)
 
     module ScaleFactory
 
@@ -18,7 +18,7 @@ module Music
         klass = Cyclic.module_eval "#{class_name} = Class.new(Scale)"
 
         klass.class_eval do
-          # Initialize new scale's interval variable
+          # Initialize new scales's interval variable
           self.intervals = intervals.map { |int| Interval.new(int.to_i) }
           self.mode_names = mode_names
 
@@ -31,7 +31,7 @@ module Music
             # Add the mode to the Scale modes variable
             self.add_mode(mode_klass)
 
-            # Open the mode's class to initialize it (scale, name, degree)
+            # Open the mode's class to initialize it (scales, name, degree)
             mode_klass.class_eval do
               self.scale = klass
               self.degree = i + 1
