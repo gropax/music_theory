@@ -2,7 +2,10 @@ require_relative 'interval'
 
 module Music
   module Cyclic
-    # @todo rename to INTERVALS
+    # @todo
+    #   rename to INTERVALS
+    #   Consider negative intervals
+    #
     INTERVAL_NAMES = {
         unison: 0,
         minor_second: 1,

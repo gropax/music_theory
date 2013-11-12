@@ -6,7 +6,7 @@ module Music
       include HasNotes
       attr_reader :notes, :modes, :generic_scale, :root
       # Guarantying that scale and mode share the same interface
-      alias_method :root, :key
+      alias_method :key, :root
 
       def initialize(generic_scale, root)
         @generic_scale, @root = generic_scale, root

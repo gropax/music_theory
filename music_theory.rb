@@ -1,5 +1,7 @@
 
 require_relative 'cyclic'
+require_relative 'absolute/note'
+require_relative 'absolute/note_io'
 
 module Music
 

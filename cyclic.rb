@@ -60,34 +60,34 @@ module Music
         minor_pentatonic: PENTATONIC_SCALE.modes[4],
     }
 
-    # Chords Constants
-    MAJOR_CHORD = GenericChord.new('major chord', 'M', [0, 4, 7])
-    MINOR_CHORD = GenericChord.new('major chord', 'm', [0, 3, 7])
-    DIMINISHED_CHORD = GenericChord.new('diminished chord', 'dim', [0, 4, 7])
-    AUGMENTED_CHORD = GenericChord.new('augmented chord', 'aug', [0, 4, 7])
-
-    SEVENTH_CHORD = GenericChord.new('7th chord', '7', MODES[:mixolydian])
-    MAJOR_7_CHORD = GenericChord.new('major 7th chord', 'M7', [0, 4, 7, 11])
-    MINOR_7_CHORD = GenericChord.new('major 7th chord', 'm7', [0, 3, 7, 10])
-    HALF_DIMINISHED_CHORD = GenericChord.new('half diminished chord', 'ø', [0, 4, 7])
-    #DIMINISHED_7_CHORD = GenericChord.new('diminished 7th chord', 'dim7', [0, 4, 7])
-
-    TRIADS = {
-        major_chord: MAJOR_CHORD,
-        minor_chord: MINOR_CHORD,
-        diminished_chord: DIMINISHED_CHORD,
-        augmented_chord: AUGMENTED_CHORD,
-    }
-
-    SEVENTH_CHORDS = {
-        seventh: SEVENTH_CHORD,
-        major_7th: MAJOR_7_CHORD,
-        minor_7th: MINOR_7_CHORD,
-        half_diminished_chord: HALF_DIMINISHED_CHORD,
-        #diminished_7th: DIMINISHED_7_CHORD,
-    }
-
-    CHORDS = TRIADS + SEVENTH_CHORDS
+    ## Chords Constants
+    #MAJOR_CHORD = GenericChord.new('major chord', 'M', [0, 4, 7])
+    #MINOR_CHORD = GenericChord.new('major chord', 'm', [0, 3, 7])
+    #DIMINISHED_CHORD = GenericChord.new('diminished chord', 'dim', [0, 4, 7])
+    #AUGMENTED_CHORD = GenericChord.new('augmented chord', 'aug', [0, 4, 7])
+    #
+    #SEVENTH_CHORD = GenericChord.new('7th chord', '7', MODES[:mixolydian])
+    #MAJOR_7_CHORD = GenericChord.new('major 7th chord', 'M7', [0, 4, 7, 11])
+    #MINOR_7_CHORD = GenericChord.new('major 7th chord', 'm7', [0, 3, 7, 10])
+    #HALF_DIMINISHED_CHORD = GenericChord.new('half diminished chord', 'ø', [0, 4, 7])
+    ##DIMINISHED_7_CHORD = GenericChord.new('diminished 7th chord', 'dim7', [0, 4, 7])
+    #
+    #TRIADS = {
+    #    major_chord: MAJOR_CHORD,
+    #    minor_chord: MINOR_CHORD,
+    #    diminished_chord: DIMINISHED_CHORD,
+    #    augmented_chord: AUGMENTED_CHORD,
+    #}
+    #
+    #SEVENTH_CHORDS = {
+    #    seventh: SEVENTH_CHORD,
+    #    major_7th: MAJOR_7_CHORD,
+    #    minor_7th: MINOR_7_CHORD,
+    #    half_diminished_chord: HALF_DIMINISHED_CHORD,
+    #    #diminished_7th: DIMINISHED_7_CHORD,
+    #}
+    #
+    #CHORDS = TRIADS + SEVENTH_CHORDS
 
   end
 
