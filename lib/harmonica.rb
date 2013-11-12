@@ -1,4 +1,4 @@
-require_relative 'music_theory'
+require_relative 'music'
 # Class that models a diatonic harmonica
 #
 # @example
@@ -35,6 +35,10 @@ class Harmonica
     end
   end
 
+  def size
+    @holes.size
+  end
+
   def [](i)
     @holes[i-1]
   end
@@ -57,47 +61,56 @@ class Harmonica
   class Hole
     AlterationError = Class.new(StandardError)
 
-    def initialize(key, number, notes)
+    def initialize(key, number, airflow)
       @number = number
-      @notes = {blow: [], draw: []}
-      @notes.each_pair do |k, v|
+      @airflow = [:blow, :draw].map do |side|
         # Create regular note
-        reg = key + notes[k][:regular]
-        v << Note.new(@number, reg, :regular)
+        reg = key + airflow[side][:regular]
+        af_ary = [] << Airflow.new(self, reg, side, :regular)
         # Create altered notes if any
-        if (alt_ary = notes[k][:alter])
+        if (alt_ary = notes[side][:alter])
           type, *alts = alt_ary
-          v += alts.map { |alt| Note.new(@number, reg, type, alt) }
+          af_ary << alts.map { |alt| Airflow.new(self, reg, side, type, alt) }
         end
+        af_ary
+      end.flatten
+    end
+
+    def play(side, alter = 0)
+      afs = @airflow.select { |af| af.side == side && af.alter == alter }
+      if afs.empty?
+        raise AlterationError, "No #{alter} #{side} alteration on hole #{@number}"
+      else
+        afs.first
       end
     end
 
     def blow(alter = 0)
-      @notes[:blow][alter.abs]
+      play(:blow, alter)
     end
 
     def draw(alter = 0)
-      @notes[:draw][alter.abs]
+      play(:draw, alter)
     end
 
     def get(note)
       case note
         when Cyclic::Note
-          @notes.select { |n| n.cyclic == note }
+          @airflow.select { |af| af.note.cyclic == note }
         when Absolute::Note
-          @notes.select { |n| n == note }
+          @airflow.select { |af| af.note == note }
         else
           raise TypeError, "invalid type: #{note.class}"
       end
     end
   end
 
-  class Note < Absolute::Note
-    attr_reader :airflow, :alter
+  class Airflow
+    attr_reader :hole, :note, :side, :type, :alter
 
-    def initialize(number, base, airflow, alter = 0)
-      super(base + alter)
-      @number, @airflow, @alter = number, airflow, alter
+    def initialize(hole, base, side, type, alter = 0)
+      @note = Absolute::Note.new(base + alter)
+      @hole, @side, @type, @alter = hole, side, type, alter
     end
   end
 
